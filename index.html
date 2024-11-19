@@ -8,8 +8,17 @@
     <title>Document</title>
 </head>
 <body>
-<div class="container  ">
-    <div class="row containerPokemon"></div>
+<div class="container d-flex flex-column ">
+    <nav class="navbar bg-body-tertiary my-4">
+        <div class="container-fluid">
+            <a class="navbar-brand">Navbar</a>
+            <form class="d-flex" role="search">
+                <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+                <button class="btn btn-outline-warning" type="submit">Search</button>
+            </form>
+        </div>
+    </nav>
+    <div class="row containerPokemon text-center"></div>
 </div>
 
 <script src="js/main.js"></script>
