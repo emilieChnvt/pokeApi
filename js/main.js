@@ -28,7 +28,7 @@ fetch(url)
 
                 const pokemonId = button.getAttribute('data-id');
                 console.log(pokemonId);
-                window.location.href = `pokemon.html?id=${pokemonId}`//pour changer de page
+                window.location.href = `https://pokebuildapi.fr/api/v1/pokemon/id=${pokemonId}`//pour changer de page
             })
         });
 
