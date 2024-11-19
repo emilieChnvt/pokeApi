@@ -2,7 +2,7 @@ const containerPokemon = document.querySelector(".containerPokemon");
 
 
 
-let url = 'https://pokebuildapi.fr/api/v1/pokemon';
+let url = 'https://pokebuildapi.fr/api/v1/pokemon/limit/20';
 
 fetch(url)
  .then(response => response.json())
@@ -15,7 +15,7 @@ fetch(url)
                         <div class="card-body">
                             <h5 class="card-title">${pokemon.name}</h5>
                             <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                            <a href="#" class="btn btn-primary seeMore">see more</a>
+                            <a href="#" class="btn btn-primary seeMore" data-id="${pokemon.id}">see more</a> 
                         </div>
                     </div>
                     
@@ -25,9 +25,10 @@ fetch(url)
         const seeMores= document.querySelectorAll(".seeMore");
         seeMores.forEach(button=>{
             button.addEventListener('click', e => {
-                fetch(url)
-                    .then(response => response.json())
-                    .then(data => console.log(data.id))
+
+                const pokemonId = button.getAttribute('data-id');
+                console.log(pokemonId);
+                window.location.href = `pokemon.html?id=${pokemonId}`//pour changer de page
             })
         });
 
