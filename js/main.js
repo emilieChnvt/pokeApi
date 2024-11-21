@@ -1,14 +1,29 @@
 const containerPokemon = document.querySelector(".containerPokemon");
 
 
+
 let url = 'https://pokebuildapi.fr/api/v1/pokemon/limit/20'; //PAS TOUS AFFICHÉ CAR PAGE CHARGEAIT TROP LONGTEMPS
 
 fetch(url)
-    .then(response => response.json())
+ .then(response => response.json())
     .then(data => {
-        data.forEach(pokemon =>displayPokemon(pokemon))
+        data.forEach((pokemon) => {
 
-function displayPokemon() {
+    })
+        containerPokemon.addEventListener('click', (e) => {
+            if(e.target.classList.contains('seeMore')) {
+                const pokemonId = e.target.getAttribute('data-id'); // ajouté sur le bouton
+                const selectedPokemon = data.filter((pokemon) => pokemon.id == pokemonId);
+                console.log(selectedPokemon);
+                if(selectedPokemon === 0) retun;
+                const pokemon = selectedPokemon[0];
+
+
+            }
+        })
+
+    })
+function displayPokemonsList(){
     let cardsPokemon = `
                 <div class="col-4 ">
                     <div class="card  border border-warning poke  ">
@@ -23,7 +38,7 @@ function displayPokemon() {
                 </div>`
     containerPokemon.innerHTML += cardsPokemon
 }
-function displayPokemonsList(){
+function displayPokemon() {
     let cardPokemonsDetails = `
                         <div class="card border-warning poke w-50 h-50">
                                 <img src="${pokemon.image}" class="card-img-top w-100" alt="...">
@@ -41,15 +56,3 @@ function displayPokemonsList(){
 
     containerPokemon.innerHTML = cardPokemonsDetails;
 }
-
-        containerPokemon.addEventListener('click', (e) => {
-            if(e.target.classList.contains('seeMore')) {
-                const pokemonId = e.target.getAttribute('data-id'); // ajouté sur le bouton
-                const selectedPokemon = data.filter((pokemon) => pokemon.id == pokemonId);
-
-                if(selectedPokemon === 0) retun;
-                const pokemon = selectedPokemon[0];
-
-
-        }
-
