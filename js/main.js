@@ -6,24 +6,23 @@ let url = 'https://pokebuildapi.fr/api/v1/pokemon/limit/20'; //PAS TOUS AFFICHÉ
 
 fetch(url)
  .then(response => response.json())
-    .then(data => {
-        data.forEach((pokemon) => {
-
-    })
+    .then(data => displayPokemonsList(data))
         containerPokemon.addEventListener('click', (e) => {
+
             if(e.target.classList.contains('seeMore')) {
                 const pokemonId = e.target.getAttribute('data-id'); // ajouté sur le bouton
                 const selectedPokemon = data.filter((pokemon) => pokemon.id == pokemonId);
                 console.log(selectedPokemon);
-                if(selectedPokemon === 0) retun;
-                const pokemon = selectedPokemon[0];
+                if(selectedPokemon) displayPokemon(selectedPokemon);
+
 
 
             }
         })
 
-    })
-function displayPokemonsList(){
+
+function displayPokemonsList(data) {
+    data.forEach((pokemon) => {
     let cardsPokemon = `
                 <div class="col-4 ">
                     <div class="card  border border-warning poke  ">
@@ -37,7 +36,7 @@ function displayPokemonsList(){
                     
                 </div>`
     containerPokemon.innerHTML += cardsPokemon
-}
+})}
 function displayPokemon() {
     let cardPokemonsDetails = `
                         <div class="card border-warning poke w-50 h-50">
