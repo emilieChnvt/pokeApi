@@ -42,7 +42,7 @@ function displayPokemon(pokemon) {
                                     <p class="card-text">Attack spéciale : ${pokemon.special_attack}</p>
                                     <p class="card-text">Defense spéciale: ${pokemon.special_defense}</p>
                                     <p class="card-text">Vitesse: ${pokemon.speed}</p>
-                                    <a href="#" class="btn btn-warning seeMore">Go Back</a> 
+                                    <a href="#" class="btn btn-warning seeMore goBack">Go Back</a> 
                                 </div>
                         
                         </div>`
@@ -57,6 +57,11 @@ function eventListener(data) {
             const selectedPokemon = data.filter((pokemon) => pokemon.id == pokemonId)[0]; // sans [0] c'est un tableau
             console.log(selectedPokemon);
             if (selectedPokemon) displayPokemon(selectedPokemon);
+
+        }
+        if(e.target.classList.contains('goBack')) {
+            displayPokemonsList(data);
+
 
         }
 
