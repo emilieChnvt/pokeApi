@@ -37,11 +37,11 @@ function displayPokemon(pokemon) {
                                 <img src="${pokemon.image}" class="card-img-top w-100" alt="...">
                                 <div class="card-body">
                                     <h5 class="card-title text-warning  fs-3">${pokemon.name}</h5>
-                                    <p class="card-text">Attack : ${pokemon.attack}</p>
-                                    <p class="card-text">Defense : ${pokemon.defense}</p>
-                                    <p class="card-text">Attack spéciale : ${pokemon.special_attack}</p>
-                                    <p class="card-text">Defense spéciale: ${pokemon.special_defense}</p>
-                                    <p class="card-text">Vitesse: ${pokemon.speed}</p>
+                                    <p class="card-text">Attack : ${pokemon.stats.attack}</p>
+                                    <p class="card-text">Defense : ${pokemon.stats.defense}</p>
+                                    <p class="card-text">Attack spéciale : ${pokemon.stats.special_attack}</p>
+                                    <p class="card-text">Defense spéciale: ${pokemon.stats.special_defense}</p>
+                                    <p class="card-text">Vitesse: ${pokemon.stats.speed}</p>
                                     <a href="#" class="btn btn-warning seeMore goBack">Go Back</a> 
                                 </div>
                         
@@ -60,7 +60,12 @@ function eventListener(data) {
 
         }
         if(e.target.classList.contains('goBack')) {
+            containerPokemon.innerHTML = '';
             displayPokemonsList(data);
+
+
+
+
 
 
         }
