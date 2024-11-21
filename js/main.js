@@ -4,33 +4,28 @@ const containerPokemon = document.querySelector(".containerPokemon");
 let url = 'https://pokebuildapi.fr/api/v1/pokemon/limit/20'; //PAS TOUS AFFICHÉ CAR PAGE CHARGEAIT TROP LONGTEMPS
 
 fetch(url)
- .then(response => response.json())
+    .then(response => response.json())
     .then(data => {
-        data.forEach((pokemon) => {
-            let cardsPokemon = `
+        data.forEach(pokemon =>displayPokemon(pokemon))
+
+function displayPokemon() {
+    let cardsPokemon = `
                 <div class="col-4 ">
                     <div class="card  border border-warning poke  ">
                         <img src="${pokemon.image}" class="card-img-top w-100" alt="...">
                         <div class="card-body">
                             <h5 class="card-title text-warning  fs-3">${pokemon.name}</h5>
-                            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                            <p class="card-text">There is no description of Pokemons</p>
                             <a href="#" class="btn btn-warning seeMore" data-id="${pokemon.id}">See more</a> 
                         </div>
                     </div>
                     
                 </div>`
-            containerPokemon.innerHTML += cardsPokemon
-    })
-        containerPokemon.addEventListener('click', (e) => {
-            if(e.target.classList.contains('seeMore')) {
-                const pokemonId = e.target.getAttribute('data-id'); // ajouté sur le bouton
-                const selectedPokemon = data.filter((pokemon) => pokemon.id == pokemonId);
-                console.log(selectedPokemon);
-                if(selectedPokemon === 0) retun;
-                const pokemon = selectedPokemon[0];
-
-                let cardPokemonsDetails = `
-                        <div class="card border-warning poke w-50">
+    containerPokemon.innerHTML += cardsPokemon
+}
+function displayPokemonsList(){
+    let cardPokemonsDetails = `
+                        <div class="card border-warning poke w-50 h-50">
                                 <img src="${pokemon.image}" class="card-img-top w-100" alt="...">
                                 <div class="card-body">
                                     <h5 class="card-title text-warning  fs-3">${pokemon.name}</h5>
@@ -44,9 +39,17 @@ fetch(url)
                         
                         </div>`
 
-containerPokemon.innerHTML = cardPokemonsDetails;
-            }
-        })
+    containerPokemon.innerHTML = cardPokemonsDetails;
+}
 
-    })
+        containerPokemon.addEventListener('click', (e) => {
+            if(e.target.classList.contains('seeMore')) {
+                const pokemonId = e.target.getAttribute('data-id'); // ajouté sur le bouton
+                const selectedPokemon = data.filter((pokemon) => pokemon.id == pokemonId);
+
+                if(selectedPokemon === 0) retun;
+                const pokemon = selectedPokemon[0];
+
+
+        }
 
