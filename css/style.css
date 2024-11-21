@@ -1,0 +1,12 @@
+.poke{
+    transition: O.5s;
+}
+
+.poke:hover{
+    background-color: orange;
+    color:white;
+
+}
+.seeMore:hover{
+    color:white
+}

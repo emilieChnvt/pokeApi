@@ -8,27 +8,37 @@ fetch(url)
  .then(response => response.json())
     .then(data => {
         data.forEach((pokemon) => {
-            let cardPokemon = `
-                <div class="col-3">
-                    <div class="card poke w-100 h-100">
+            let cardsPokemon = `
+                <div class="col-4 ">
+                    <div class="card  border border-warning poke  ">
                         <img src="${pokemon.image}" class="card-img-top w-100" alt="...">
                         <div class="card-body">
-                            <h5 class="card-title">${pokemon.name}</h5>
+                            <h5 class="card-title text-warning  fs-3">${pokemon.name}</h5>
                             <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                            <a href="#" class="btn btn-warning seeMore" data-id="${pokemon.id}">see more</a> 
+                            <a href="#" class="btn btn-warning seeMore" data-id="${pokemon.id}">See more</a> 
                         </div>
                     </div>
                     
                 </div>`
-            containerPokemon.innerHTML += cardPokemon
+            containerPokemon.innerHTML += cardsPokemon
     })
         const seeMores= document.querySelectorAll(".seeMore");
         seeMores.forEach(button=>{
             button.addEventListener('click', e => {
+                let cardPoKemon = `
+                         <div class="col-4 ">
+                            <div class="card  border border-warning poke  ">
+                                <img src="${pokemon.image}" class="card-img-top w-100" alt="...">
+                                <div class="card-body">
+                                    <h5 class="card-title text-warning  fs-3">${pokemon.name}</h5>
+                                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                                    <a href="#" class="btn btn-warning seeMore" data-id="${pokemon.id}">See more</a> 
+                                </div>
+                            </div>
+                            
+                        </div>`
 
-                const pokemonId = button.getAttribute('data-id');
-                console.log(pokemonId);
-                window.location.href = `https://pokebuildapi.fr/api/v1/pokemon/id=${pokemonId}`//pour changer de page
+                containerPokemon.innerHTML = cardPoKemon
             })
         });
 
