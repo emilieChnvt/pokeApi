@@ -31,9 +31,10 @@ function displayPokemonsList(data) {
     containerPokemon.innerHTML += cardsPokemon
 })}
 function displayPokemon(pokemon) {
+    console.log(pokemon);
     let cardPokemonsDetails = `
                         <div class="card border-warning poke w-50 h-50">
-                                <img src="${pokemon}" class="card-img-top w-100" alt="...">
+                                <img src="${pokemon.image}" class="card-img-top w-100" alt="...">
                                 <div class="card-body">
                                     <h5 class="card-title text-warning  fs-3">${pokemon.name}</h5>
                                     <p class="card-text">Attack : ${pokemon.attack}</p>
@@ -53,7 +54,7 @@ function eventListener(data) {
 
         if(e.target.classList.contains('seeMore')) {
             const pokemonId = e.target.getAttribute('data-id'); // ajouté sur le bouton
-            const selectedPokemon = data.filter((pokemon) => pokemon.id == pokemonId);
+            const selectedPokemon = data.filter((pokemon) => pokemon.id == pokemonId)[0]; // sans [0] c'est un tableau
             console.log(selectedPokemon);
             if (selectedPokemon) displayPokemon(selectedPokemon);
 
