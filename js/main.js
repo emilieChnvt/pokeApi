@@ -8,20 +8,15 @@ fetch(url)
  .then(response => response.json())
     .then(data => {
         console.log(data);
-        const pokemonList = data.result;
-        console.log(pokemonList);
-        displayPokemonsList(pokemonList);
+        const pokemonListArray = data.results;
+        console.log(pokemonListArray);
+        displayPokemonsList(pokemonListArray);
     });
 
 
 
-
-
-
-
-
-function displayPokemonsList(pokemonList) {
-    pokemonList.forEach((pokemon) => {
+function displayPokemonsList(pokemonListArray) {
+    pokemonListArray.forEach((pokemon) => {
     let cardsPokemon = `
                 <div class="col-4 ">
                     <div class="card  border border-warning poke  ">
