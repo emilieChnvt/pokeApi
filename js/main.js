@@ -2,20 +2,26 @@ const containerPokemon = document.querySelector(".containerPokemon");
 
 
 
-let url = 'https://pokebuildapi.fr/api/v1/pokemon/limit/20'; //PAS TOUS AFFICHÉ CAR PAGE CHARGEAIT TROP LONGTEMPS
+let url = 'https://pokeapi.co/api/v2/pokemon/'; //PAS TOUS AFFICHÉ CAR PAGE CHARGEAIT TROP LONGTEMPS
 
 fetch(url)
  .then(response => response.json())
     .then(data => {
-        displayPokemonsList(data);
-        eventListener(data)
+        console.log(data);
+        const pokemonList = data.result;
+        console.log(pokemonList);
+        displayPokemonsList(pokemonList);
     });
 
 
 
 
-function displayPokemonsList(data) {
-    data.forEach((pokemon) => {
+
+
+
+
+function displayPokemonsList(pokemonList) {
+    pokemonList.forEach((pokemon) => {
     let cardsPokemon = `
                 <div class="col-4 ">
                     <div class="card  border border-warning poke  ">
@@ -30,6 +36,7 @@ function displayPokemonsList(data) {
                 </div>`
     containerPokemon.innerHTML += cardsPokemon
 })}
+/*
 function displayPokemon(pokemon) {
     console.log(pokemon);
     let cardPokemonsDetails = `
@@ -73,4 +80,4 @@ function eventListener(data) {
 
     })
 
-}
+}*/
