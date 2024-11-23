@@ -1,4 +1,5 @@
 const containerPokemon = document.querySelector(".containerPokemon");
+const containerButton = document.querySelector(".containerButton");
 
 
 
@@ -7,13 +8,26 @@ let url = 'https://pokeapi.co/api/v2/pokemon/'; //PAS TOUS AFFICHÉ CAR PAGE CHA
 fetch(url)
  .then(response => response.json())
     .then(data => {
-        console.log(data);
         const pokemonListArray = data.results;
-        console.log(pokemonListArray);
         displayPokemonsList(pokemonListArray);
+        eventListener(pokemonListArray)
     });
+fetch('https://pokeapi.co/api/v2/ability/')
+    .then(response => response.json())
+    .then(data => {
+        displayButtonAbility(data)
 
+    })
 
+function displayButtonAbility(data){
+    letPokemonAbilityList = data.results;
+    letPokemonAbilityList.forEach((ability) => {
+        console.log(ability);
+        let buttonAbility = document.createElement("button");
+        buttonAbility.textContent = ability.name;
+        containerButton.appendChild(buttonAbility);
+    })
+}
 
 function displayPokemonsList(pokemonListArray) {
     pokemonListArray.forEach((pokemon) => {
@@ -31,7 +45,6 @@ function displayPokemonsList(pokemonListArray) {
                 </div>`
     containerPokemon.innerHTML += cardsPokemon
 })}
-/*
 function displayPokemon(pokemon) {
     console.log(pokemon);
     let cardPokemonsDetails = `
@@ -51,19 +64,19 @@ function displayPokemon(pokemon) {
 
     containerPokemon.innerHTML= cardPokemonsDetails;
 }
-function eventListener(data) {
+function eventListener(pokemonListArray) {
     containerPokemon.addEventListener('click', (e) => {
 
         if(e.target.classList.contains('seeMore')) {
             const pokemonId = e.target.getAttribute('data-id'); // ajouté sur le bouton
-            const selectedPokemon = data.filter((pokemon) => pokemon.id == pokemonId)[0]; // sans [0] c'est un tableau
+            const selectedPokemon = pokemonListArray.filter((pokemon) => pokemon.id == pokemonId)[0]; // sans [0] c'est un tableau
             console.log(selectedPokemon);
             if (selectedPokemon) displayPokemon(selectedPokemon);
 
         }
         if(e.target.classList.contains('goBack')) {
             containerPokemon.innerHTML = '';
-            displayPokemonsList(data);
+            displayPokemonsList(pokemonListArray);
 
 
 
@@ -75,4 +88,4 @@ function eventListener(data) {
 
     })
 
-}*/
+}
