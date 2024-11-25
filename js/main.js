@@ -3,13 +3,15 @@ const containerButton = document.querySelector(".containerButton");
 
 
 
-let url = 'https://pokeapi.co/api/v2/pokemon/'; //PAS TOUS AFFICHÉ CAR PAGE CHARGEAIT TROP LONGTEMPS
+let apiPoke = 'https://pokeapi.co/api/v2/pokemon/'; //PAS TOUS AFFICHÉ CAR PAGE CHARGEAIT TROP LONGTEMPS
 
-fetch(url)
+fetch(apiPoke)
  .then(response => response.json())
     .then(data => {
         const pokemonListArray = data.results;
+        displayButtonAbilities();
         displayAllPokemons(pokemonListArray);
+
 
     });
 
@@ -36,4 +38,20 @@ function displayAllPokemons(pokemonListArray) {
 
     })
 
+}
+
+
+function displayButtonAbilities() {
+    fetch('https://pokeapi.co/api/v2/ability/')
+        .then(response => response.json())
+        .then(data => {
+            const listOfPokemonsAbilities = data.results;
+            listOfPokemonsAbilities.forEach((ability) => {
+                let buttonAbility = document.createElement("button");
+                buttonAbility.textContent = ability.name;
+                buttonAbility.classList.add("w-10");
+                containerButton.appendChild(buttonAbility);
+            })
+
+        })
 }
