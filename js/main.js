@@ -9,12 +9,18 @@ fetch(url)
  .then(response => response.json())
     .then(data => {
         const pokemonListArray = data.results;
-        pokemonListArray.forEach((pokemon) => {
-            fetch(pokemon.url)
-                .then(response => response.json())
-                .then(data => {
+        displayAllPokemons(pokemonListArray);
 
-                        let pokemonCard = `
+    });
+
+
+function displayAllPokemons(pokemonListArray) {
+    pokemonListArray.forEach((pokemon) => {
+        fetch(pokemon.url)
+            .then(response => response.json())
+            .then(data => {
+
+                let pokemonCard = `
                             <div class="card" style="width: 18rem;">
                                 <img src="${data.sprites.front_default}" class="card-img-top" alt="...">
                                 <div class="card-body">
@@ -23,14 +29,11 @@ fetch(url)
                                         <a href="#" class="btn btn-primary">Go somewhere</a>
                                 </div>
                             </div>`
-                        containerPokemon.innerHTML += pokemonCard;
+                containerPokemon.innerHTML += pokemonCard;
 
-                })
-
-
-        })
-
-    });
+            })
 
 
+    })
 
+}
