@@ -9,7 +9,13 @@ fetch(url)
  .then(response => response.json())
     .then(data => {
         const pokemonListArray = data.results;
-        console.log(pokemonListArray[1]);
+        pokemonListArray.forEach((pokemon) => {
+            fetch(pokemon.url)
+                .then(response => response.json())
+                .then(data => {
+                    console.log(data);
+                })
+        })
 
     });
 
