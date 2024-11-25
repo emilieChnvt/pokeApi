@@ -18,6 +18,8 @@ fetch(apiPoke)
 
 
 function displayAllPokemons(pokemonListArray) {
+    containerPokemon.innerHTML += ``
+
     pokemonListArray.forEach((pokemon) => {
         fetch(pokemon.url)
             .then(response => response.json())
@@ -47,6 +49,7 @@ function displayButtonAbilities() {
         .then(response => response.json())
         .then(data => {
 
+
             const listOfPokemonsAbilities = data.results;
             listOfPokemonsAbilities.forEach((ability) => {
                 let buttonAbility = document.createElement("button");
@@ -62,8 +65,9 @@ function displayButtonAbilities() {
 }
 
 function buttonAbilitiesClicked(abilityUrl) {
+    containerPokemon.innerHTML += ``
 
-        fetch(abilityUrl)//recupère les ability une par une
+    fetch(abilityUrl)//recupère les ability une par une
             .then(response => response.json())
             .then(data => {
 
@@ -77,7 +81,7 @@ function displayPokemonsWithAbilities(pokemons){
         fetch(pokemon.url)
             .then(response => response.json())
             .then(data => {
-
+                containerPokemon.innerHTML += ``
                 let pokemonCard = `
                             <div class="card" style="width: 18rem;">
                                 <img src="${data.sprites.front_default}" class="card-img-top" alt="...">
