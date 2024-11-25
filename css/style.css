@@ -10,3 +10,8 @@
 .seeMore:hover{
     color:white
 }
+.container{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
