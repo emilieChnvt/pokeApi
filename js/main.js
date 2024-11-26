@@ -77,11 +77,14 @@ function buttonAbilitiesClicked(abilityUrl) {
             })
 }
 function displayPokemonsWithAbilities(pokemons){
+    containerPokemon.innerHTML = ``
+
     pokemons.forEach((pokemon) => {
+
         fetch(pokemon.url)
             .then(response => response.json())
             .then(data => {
-                containerPokemon.innerHTML += ``
+
                 let pokemonCard = `
                             <div class="card" style="width: 18rem;">
                                 <img src="${data.sprites.front_default}" class="card-img-top" alt="...">
@@ -91,6 +94,7 @@ function displayPokemonsWithAbilities(pokemons){
                                         <a href="#" class="btn btn-primary">Go somewhere</a>
                                 </div>
                             </div>`
+
                 containerPokemon.innerHTML += pokemonCard;
 
             })
