@@ -54,7 +54,7 @@ function displayPokemonAfterButtonCardClicked() {
                 .then(response => response.json())
                 .then(data => {
             console.log(data);
-            let pokemonStats = data.stats.map(stat => `<li>${stat.stat.name} : ${stat.base_stat}.</li>`);
+            let pokemonStats = data.stats.map(stat => `<li class="pokemonStat">${stat.stat.name} : ${stat.base_stat}</li>`).join('');
             console.log(pokemonStats);
 
                     let pokemonCard = `
@@ -63,7 +63,7 @@ function displayPokemonAfterButtonCardClicked() {
                                 <div class="card-body">
                                         <h5 class="card-title">${data.name}</h5>
                                         <p class="card-text">${pokemonStats}</p>
-                                        <p class="card-text">${data.descriptions}</p>
+                                        
                                         
                                 </div>
                             </div>` // data-url pour récupérer url
