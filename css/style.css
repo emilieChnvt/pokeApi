@@ -15,3 +15,9 @@
     flex-direction: column;
     justify-content: center;
 }
+.btnAbility{
+    background-color: orange;
+    border:1px solid orange;
+    border-radius: 10px;
+
+}

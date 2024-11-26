@@ -14,8 +14,8 @@ fetch(apiPoke)
 
 
 
-    });
 
+    });
 
 function displayAllPokemons(pokemonListArray) {
     containerPokemon.innerHTML += ``
@@ -31,14 +31,46 @@ function displayAllPokemons(pokemonListArray) {
                                 <div class="card-body">
                                         <h5 class="card-title">${data.name}</h5>
                                         <p class="card-text">${data.effect}</p>
-                                        <a href="#" class="btn btn-warning">See More</a>
+                                        <a href="#" class="btn btn-warning seeMore" data-url="${pokemon.url}">See More</a> 
                                 </div>
-                            </div>`
+                            </div>` // data-url pour récupérer url
+
+
+
                 containerPokemon.innerHTML += pokemonCard;
 
+                displayPokemonAfterButtonCardClicked()
             })
 
 
+    })
+
+}
+
+function displayPokemonAfterButtonCardClicked() {
+
+    let btnSeeMore = containerPokemon.querySelectorAll('.seeMore');
+    console.log(btnSeeMore);
+    btnSeeMore.forEach((button) => {
+        button.addEventListener("click", function() {
+            let pokemonUrl = this.getAttribute("data-url");
+            fetch(pokemonUrl)
+                .then(response => response.json())
+                .then(data => {
+                    let pokemonCard = `
+                            <div class="card border border-warning" style="width: 18rem;">
+                                <img src="${data.sprites.front_default}" class="card-img-top" alt="...">
+                                <div class="card-body">
+                                        <h5 class="card-title">${data.name}</h5>
+                                        <p class="card-text">${data.effect}</p>
+                                        <a href="#" class="btn btn-warning seeMore"">See More</a> 
+                                </div>
+                            </div>` // data-url pour récupérer url
+                    console.log(pokemonCard);
+                    containerPokemon.innerHTML = pokemonCard;
+                }
+        )
+        })
     })
 
 }
@@ -54,7 +86,7 @@ function displayButtonAbilities() {
             listOfPokemonsAbilities.forEach((ability) => {
                 let buttonAbility = document.createElement("button");
                 buttonAbility.textContent = ability.name;
-                buttonAbility.classList.add("w-10");
+                buttonAbility.classList.add("btnAbility");
                 containerButton.appendChild(buttonAbility);
 
                 buttonAbility.addEventListener('click',()=>buttonAbilitiesClicked(ability.url));
@@ -91,7 +123,7 @@ function displayPokemonsWithAbilities(pokemons){
                                 <div class="card-body">
                                         <h5 class="card-title">${data.name}</h5>
                                         <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                                        <a href="#" class="btn btn-primary">Go somewhere</a>
+                                        <a href="#" class="btn btn-warning">Go somewhere</a>
                                 </div>
                             </div>`
 
