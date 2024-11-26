@@ -12,9 +12,6 @@ fetch(apiPoke)
         displayButtonAbilities();
         displayAllPokemons(pokemonListArray);
 
-
-
-
     });
 
 function displayAllPokemons(pokemonListArray) {
@@ -24,7 +21,6 @@ function displayAllPokemons(pokemonListArray) {
         fetch(pokemon.url)
             .then(response => response.json())
             .then(data => {
-console.log(data);
                 let pokemonCard = `
                             <div class="card border border-warning" style="width: 18rem;">
                                 <img src="${data.sprites.front_default}" class="card-img-top" alt="...">
@@ -50,20 +46,25 @@ console.log(data);
 function displayPokemonAfterButtonCardClicked() {
 
     let btnSeeMore = containerPokemon.querySelectorAll('.seeMore');
-    console.log(btnSeeMore);
+
     btnSeeMore.forEach((button) => {
         button.addEventListener("click", function() {
             let pokemonUrl = this.getAttribute("data-url");
             fetch(pokemonUrl)
                 .then(response => response.json())
                 .then(data => {
+            console.log(data);
+            let pokemonStats = data.stats.map(stat => `<li>${stat.stat.name} : ${stat.base_stat}.</li>`);
+            console.log(pokemonStats);
+
                     let pokemonCard = `
                             <div class="card border border-warning" style="width: 18rem;">
                                 <img src="${data.sprites.front_default}" class="card-img-top" alt="...">
                                 <div class="card-body">
                                         <h5 class="card-title">${data.name}</h5>
-                                        <p class="card-text">${data.effect}</p>
-                                        <a href="#" class="btn btn-warning seeMore"">See More</a> 
+                                        <p class="card-text">${pokemonStats}</p>
+                                        <p class="card-text">${data.descriptions}</p>
+                                        
                                 </div>
                             </div>` // data-url pour récupérer url
                     console.log(pokemonCard);
