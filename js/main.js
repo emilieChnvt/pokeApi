@@ -24,13 +24,13 @@ function displayAllPokemons(pokemonListArray) {
         fetch(pokemon.url)
             .then(response => response.json())
             .then(data => {
-
+console.log(data);
                 let pokemonCard = `
                             <div class="card border border-warning" style="width: 18rem;">
                                 <img src="${data.sprites.front_default}" class="card-img-top" alt="...">
                                 <div class="card-body">
-                                        <h5 class="card-title">${data.name}</h5>
-                                        <p class="card-text">${data.effect}</p>
+                                        <h5 class="card-title text-uppercase text-warning">${data.name}</h5>
+                                        <p class="card-text">weight : ${data.weight} Kg</p>
                                         <a href="#" class="btn btn-warning seeMore" data-url="${pokemon.url}">See More</a> 
                                 </div>
                             </div>` // data-url pour récupérer url
