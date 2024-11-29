@@ -162,7 +162,7 @@ function buttonAbilitiesClicked(abilityUrl, pokemonListArray) {
                 displayPokemonsWithAbilities(pokemonsWithAbilities, );
             })
 }
-function displayPokemonsWithAbilities(pokemons, ) {
+function displayPokemonsWithAbilities(pokemons ) {
     containerPokemon.innerHTML = ``
     pokemons.forEach((pokemon) => {
         fetch(pokemon.url)
@@ -175,17 +175,17 @@ function displayPokemonsWithAbilities(pokemons, ) {
                                 <div class="card-body">
                                         <h5 class="card-title">${data.name}</h5>
                                         <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                                        <a href="#" class="btn btn-warning seeMore">See more</a>
+                                        <a href="#" class="btn btn-warning seeMore" data-url="${pokemon.url}">See more</a>
                                 </div>
                             </div>`
 
                 containerPokemon.innerHTML += pokemonCard;
-                setTimeout(() => {
-                    displayPokemonAfterButtonCardClicked(pokemonListArray);
-                }, 100); // Small delay to ensure all buttons are rendered
+
+                    displayPokemonAfterButtonCardClicked(pokemons);
+
             })
 
-
+        goBackListPokemons(pokemons);
     })
-goBackListPokemons(pokemonListArray);
+
 }
