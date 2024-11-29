@@ -45,11 +45,12 @@ function searchPokemon() {
                                     <p class="card-text">Weight: ${pokemonData.weight} Kg</p>
                                     <p class="card-text">Height: ${pokemonData.height} m</p>
                                     <ul class="stats">
-                                        ${pokemonData.stats.map(stat => `<li>${stat.stat.name}: ${stat.base_stat}</li>`).join('')}
+                                        ${pokemonData.stats.map(stat => `<li class="pokemonStat">${stat.stat.name}: ${stat.base_stat}</li>`).join('')}
                                     </ul>
                                     <button class="btn btn-warning goBack">Go Back</button>
                                 </div>
                             </div>`;
+                        goBackListPokemons(data.results)
                     })
             }
 
@@ -89,18 +90,17 @@ function displayAllPokemons(pokemonListArray) {
 
 function displayPokemonAfterButtonCardClicked(pokemonListArray) {
 
-    let btnSeeMore = containerPokemon.querySelectorAll('.seeMore');
+    const btnSeeMore = containerPokemon.querySelectorAll('.seeMore');
 
     btnSeeMore.forEach((button) => {
         button.addEventListener("click", function() {
             let pokemonUrl = this.getAttribute("data-url");
             fetch(pokemonUrl)
-
                 .then(response => response.json())
                 .then(data => {
-                    console.log(pokemonUrl);
+
             let pokemonStats = data.stats.map(stat => `<li class="pokemonStat">${stat.stat.name} : ${stat.base_stat}</li>`).join('');
-            console.log(pokemonStats);
+
 
                     let pokemonCard = `
                             <div class="card border border-warning" style="width: 18rem;">
@@ -159,10 +159,10 @@ function buttonAbilitiesClicked(abilityUrl, pokemonListArray) {
             .then(data => {
                 let pokemonsWithAbilities = data.pokemon.map(ability => ability.pokemon) // pour trouver pokemon avec ability du boutton
 
-                displayPokemonsWithAbilities(pokemonsWithAbilities, pokemonListArray);
+                displayPokemonsWithAbilities(pokemonsWithAbilities, );
             })
 }
-function displayPokemonsWithAbilities(pokemons, pokemonListArray) {
+function displayPokemonsWithAbilities(pokemons, ) {
     containerPokemon.innerHTML = ``
     pokemons.forEach((pokemon) => {
         fetch(pokemon.url)
