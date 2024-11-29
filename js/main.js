@@ -1,8 +1,9 @@
 const containerPokemon = document.querySelector(".containerPokemon");
 const containerButton = document.querySelector(".containerButton");
-const inputValue = document.querySelector(".input").value;
+const input = document.querySelector("#searchInput");
+
 const buttonSearch = document.querySelector(".search");
-console.log(inputValue);
+
 
 
 
@@ -16,18 +17,40 @@ fetch(apiPoke)
         displayAllPokemons(pokemonListArray);
 
     });
-buttonSearch.addEventListener('click', e => {searchPokemon()})
+buttonSearch.addEventListener('click', searchPokemon);
 function searchPokemon() {
-    let pokemonName = [];
+
     fetch(apiPoke)
         .then(response => response.json())
         .then(data => {
-            pokemonName =data.results;
-            console.log(pokemonName);
+
+            let pokemonName =data.results;
+            let foundPokemon= null
+
             for(let i = 0; i < pokemonName.length; i++) {
-                if(pokemonName[i] === inputValue) {
-                    console.log('vjjhbc');
+
+                if(pokemonName[i].name === input.value.toLowerCase()) {
+                    foundPokemon = pokemonName[i]
                 }
+            }
+            if(foundPokemon) {
+                fetch(foundPokemon.url)
+                    .then(response => response.json())
+                    .then(pokemonData => {
+                        containerPokemon.innerHTML = `
+                            <div class="card border border-warning" style="width: 18rem;">
+                                <img src="${pokemonData.sprites.front_default}" class="card-img-top" alt="${pokemonData.name}">
+                                <div class="card-body">
+                                    <h5 class="card-title text-uppercase text-warning">${pokemonData.name}</h5>
+                                    <p class="card-text">Weight: ${pokemonData.weight} Kg</p>
+                                    <p class="card-text">Height: ${pokemonData.height} m</p>
+                                    <ul class="stats">
+                                        ${pokemonData.stats.map(stat => `<li>${stat.stat.name}: ${stat.base_stat}</li>`).join('')}
+                                    </ul>
+                                    <button class="btn btn-warning goBack">Go Back</button>
+                                </div>
+                            </div>`;
+                    })
             }
 
 
