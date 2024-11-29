@@ -1,6 +1,7 @@
 const containerPokemon = document.querySelector(".containerPokemon");
 const containerButton = document.querySelector(".containerButton");
 const inputValue = document.querySelector(".input").value;
+const buttonSearch = document.querySelector(".search");
 console.log(inputValue);
 
 
@@ -15,6 +16,7 @@ fetch(apiPoke)
         displayAllPokemons(pokemonListArray);
 
     });
+buttonSearch.addEventListener('click', e => {searchPokemon()})
 function searchPokemon() {
     let pokemonName = [];
     fetch(apiPoke)
@@ -22,11 +24,17 @@ function searchPokemon() {
         .then(data => {
             pokemonName =data.results;
             console.log(pokemonName);
+            for(let i = 0; i < pokemonName.length; i++) {
+                if(pokemonName[i] === inputValue) {
+                    console.log('vjjhbc');
+                }
+            }
 
 
         })
 }
-searchPokemon();
+
+
 function displayAllPokemons(pokemonListArray) {
     containerPokemon.innerHTML = ``
 
