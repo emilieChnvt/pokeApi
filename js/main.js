@@ -1,5 +1,7 @@
 const containerPokemon = document.querySelector(".containerPokemon");
 const containerButton = document.querySelector(".containerButton");
+const inputValue = document.querySelector(".input").value;
+console.log(inputValue);
 
 
 
@@ -13,9 +15,20 @@ fetch(apiPoke)
         displayAllPokemons(pokemonListArray);
 
     });
+function searchPokemon() {
+    let pokemonName = [];
+    fetch(apiPoke)
+        .then(response => response.json())
+        .then(data => {
+            pokemonName =data.results;
+            console.log(pokemonName);
 
+
+        })
+}
+searchPokemon();
 function displayAllPokemons(pokemonListArray) {
-    containerPokemon.innerHTML += ``
+    containerPokemon.innerHTML = ``
 
     pokemonListArray.forEach((pokemon) => {
         fetch(pokemon.url)
@@ -27,7 +40,7 @@ function displayAllPokemons(pokemonListArray) {
                                 <div class="card-body">
                                         <h5 class="card-title text-uppercase text-warning">${data.name}</h5>
                                         <p class="card-text">weight : ${data.weight} Kg</p>
-                                        <a href="#" class="btn btn-warning seeMore" data-url="${pokemon.url}">See More</a> 
+                                        <a href="#" class="btn btn-warning seeMore" data-url="${pokemon.url}" type="button">See More</a> 
                                 </div>
                             </div>` // data-url pour récupérer url
 
@@ -35,7 +48,7 @@ function displayAllPokemons(pokemonListArray) {
 
                 containerPokemon.innerHTML += pokemonCard;
 
-                displayPokemonAfterButtonCardClicked()
+                displayPokemonAfterButtonCardClicked(pokemonListArray);
             })
 
 
@@ -43,7 +56,7 @@ function displayAllPokemons(pokemonListArray) {
 
 }
 
-function displayPokemonAfterButtonCardClicked() {
+function displayPokemonAfterButtonCardClicked(pokemonListArray) {
 
     let btnSeeMore = containerPokemon.querySelectorAll('.seeMore');
 
@@ -51,9 +64,10 @@ function displayPokemonAfterButtonCardClicked() {
         button.addEventListener("click", function() {
             let pokemonUrl = this.getAttribute("data-url");
             fetch(pokemonUrl)
+
                 .then(response => response.json())
                 .then(data => {
-            console.log(data);
+                    console.log(pokemonUrl);
             let pokemonStats = data.stats.map(stat => `<li class="pokemonStat">${stat.stat.name} : ${stat.base_stat}</li>`).join('');
             console.log(pokemonStats);
 
@@ -63,26 +77,35 @@ function displayPokemonAfterButtonCardClicked() {
                                 <div class="card-body">
                                         <h5 class="card-title">${data.name}</h5>
                                         <p class="card-text">${pokemonStats}</p>
-                                        
+                                        <button class="goBack bg-warning border border-warning p-2 rounded-2
+                                        ">Go Back</button>
                                         
                                 </div>
                             </div>` // data-url pour récupérer url
-                    console.log(pokemonCard);
+
                     containerPokemon.innerHTML = pokemonCard;
+                    goBackListPokemons(pokemonListArray)
                 }
         )
         })
     })
 
 }
+function goBackListPokemons(pokemonListArray) {
+    let goBackButton = document.querySelectorAll(".goBack");
+    goBackButton.forEach((goBack) => {
+        goBack.addEventListener("click", ()=> {
 
+            displayAllPokemons(pokemonListArray)
+        })
+    });
 
-function displayButtonAbilities() {
+}
+
+function displayButtonAbilities(pokemonListArray) {
     fetch('https://pokeapi.co/api/v2/ability/')
         .then(response => response.json())
         .then(data => {
-
-
             const listOfPokemonsAbilities = data.results;
             listOfPokemonsAbilities.forEach((ability) => {
                 let buttonAbility = document.createElement("button");
@@ -90,30 +113,27 @@ function displayButtonAbilities() {
                 buttonAbility.classList.add("btnAbility");
                 containerButton.appendChild(buttonAbility);
 
-                buttonAbility.addEventListener('click',()=>buttonAbilitiesClicked(ability.url));
+                buttonAbility.addEventListener('click',()=>buttonAbilitiesClicked(ability.url, pokemonListArray));
             })
 
 
         })
 }
 
-function buttonAbilitiesClicked(abilityUrl) {
-    containerPokemon.innerHTML += ``
+function buttonAbilitiesClicked(abilityUrl, pokemonListArray) {
+    containerPokemon.innerHTML = ``
 
     fetch(abilityUrl)//recupère les ability une par une
             .then(response => response.json())
             .then(data => {
-
                 let pokemonsWithAbilities = data.pokemon.map(ability => ability.pokemon) // pour trouver pokemon avec ability du boutton
-                console.log(pokemonsWithAbilities);
-                displayPokemonsWithAbilities(pokemonsWithAbilities);
+
+                displayPokemonsWithAbilities(pokemonsWithAbilities, pokemonListArray);
             })
 }
-function displayPokemonsWithAbilities(pokemons){
+function displayPokemonsWithAbilities(pokemons, pokemonListArray) {
     containerPokemon.innerHTML = ``
-
     pokemons.forEach((pokemon) => {
-
         fetch(pokemon.url)
             .then(response => response.json())
             .then(data => {
@@ -124,15 +144,17 @@ function displayPokemonsWithAbilities(pokemons){
                                 <div class="card-body">
                                         <h5 class="card-title">${data.name}</h5>
                                         <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                                        <a href="#" class="btn btn-warning">Go somewhere</a>
+                                        <a href="#" class="btn btn-warning seeMore">See more</a>
                                 </div>
                             </div>`
 
                 containerPokemon.innerHTML += pokemonCard;
-
+                setTimeout(() => {
+                    displayPokemonAfterButtonCardClicked(pokemonListArray);
+                }, 100); // Small delay to ensure all buttons are rendered
             })
 
 
     })
-
+goBackListPokemons(pokemonListArray);
 }
