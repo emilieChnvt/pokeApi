@@ -1,7 +1,7 @@
 const containerPokemon = document.querySelector(".containerPokemon");
 const containerButton = document.querySelector(".containerButton");
 const input = document.querySelector("#searchInput");
-
+const iconHouse = document.querySelector(".iconHouse");
 const buttonSearch = document.querySelector(".search");
 
 
@@ -18,6 +18,11 @@ fetch(apiPoke)
 
     });
 buttonSearch.addEventListener('click', searchPokemon);
+iconHouse.addEventListener('click', returnHomePage)
+function returnHomePage(e, pokemonListArray) {
+    e.preventDefault();
+    displayAllPokemons(pokemonListArray);
+}
 function searchPokemon() {
 
     fetch(apiPoke)
