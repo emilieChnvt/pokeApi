@@ -4,7 +4,7 @@ const input = document.querySelector("#searchInput");
 const iconHouse = document.querySelector(".iconHouse");
 const buttonSearch = document.querySelector(".search");
 
-
+let pokemonListArray =[]
 
 
 let apiPoke = 'https://pokeapi.co/api/v2/pokemon/'; //PAS TOUS AFFICHÉ CAR PAGE CHARGEAIT TROP LONGTEMPS
@@ -12,17 +12,17 @@ let apiPoke = 'https://pokeapi.co/api/v2/pokemon/'; //PAS TOUS AFFICHÉ CAR PAGE
 fetch(apiPoke)
  .then(response => response.json())
     .then(data => {
-        const pokemonListArray = data.results;
+        pokemonListArray = data.results;
         displayButtonAbilities();
         displayAllPokemons(pokemonListArray);
 
     });
 buttonSearch.addEventListener('click', searchPokemon);
-iconHouse.addEventListener('click', returnHomePage)
-function returnHomePage(e, pokemonListArray) {
+iconHouse.addEventListener('click', function returnHomePage(e){
     e.preventDefault();
     displayAllPokemons(pokemonListArray);
-}
+})
+
 function searchPokemon() {
 
     fetch(apiPoke)
@@ -179,7 +179,7 @@ function displayPokemonsWithAbilities(pokemons ) {
                                 <img src="${data.sprites.front_default}" class="card-img-top" alt="...">
                                 <div class="card-body">
                                         <h5 class="card-title">${data.name}</h5>
-                                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                                        <p class="card-text">${data.weight} Kg</p>
                                         <a href="#" class="btn btn-warning seeMore" data-url="${pokemon.url}">See more</a>
                                 </div>
                             </div>`
