@@ -32,6 +32,7 @@ iconHouse.addEventListener('click', (e)=>{
 
 function searchPokemon() {
     const inputValue = input.value.trim().toLowerCase();
+
     const foundPokemon= pokemonListArray.find(pokemon => pokemon.name.toLowerCase() === inputValue);
     console.log(pokemonListArray)
             if(foundPokemon) {
