@@ -179,7 +179,7 @@ function displayPokemonsWithAbilities(pokemons ) {
             .then(data => {
 
                 let pokemonCard = `
-                            <div class="card" style="width: 18rem;">
+                            <div class="card border border-warning" style="width: 18rem;">
                                 <img src="${data.sprites.front_default}" class="card-img-top" alt="...">
                                 <div class="card-body">
                                         <h5 class="card-title">${data.name}</h5>
