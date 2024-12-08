@@ -49,7 +49,7 @@ function searchPokemon() {
                                     <ul class="stats">
                                         ${pokemonData.stats.map(stat => `<li class="pokemonStat">${stat.stat.name}: ${stat.base_stat}</li>`).join('')}
                                     </ul>
-                                    <button class="btn btn-warning goBack">Go Back</button>
+                                    <button class="btn btn-warning goBack" >Go Back</button>
                                 </div>
                             </div>`;
                         goBackListPokemons(pokemonListArray);
