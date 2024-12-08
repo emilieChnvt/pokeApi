@@ -18,7 +18,7 @@ fetch(apiPoke)
 
     });
 buttonSearch.addEventListener('click', searchPokemon);
-iconHouse.addEventListener('click', function returnHomePage(e){
+iconHouse.addEventListener('click', (e)=>{
     e.preventDefault();
     displayAllPokemons(pokemonListArray);
 })
