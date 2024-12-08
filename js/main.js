@@ -14,8 +14,10 @@ function initializePage(){
     .then(response => response.json())
     .then(data => {
         pokemonListArray = data.results;
+
         displayButtonAbilities();
         displayAllPokemons(pokemonListArray);
+
 
     });
 }
@@ -29,20 +31,9 @@ iconHouse.addEventListener('click', (e)=>{
 })
 
 function searchPokemon() {
-
-    const inputValue = input.value.toLowerCase();
-    if(!inputValue){
-        alert('Please enter a valid pokemon!');
-        return;
-    }
-    if (!pokemonListArray || pokemonListArray.length === 0) {
-        alert("Les données Pokémon ne sont pas prêtes. Essayez à nouveau.");
-        return;
-    }
-
-
-            const foundPokemon= pokemonListArray.find(pokemon => pokemon.name.toLowerCase() === inputValue);
-
+    const inputValue = input.value.trim().toLowerCase();
+    const foundPokemon= pokemonListArray.find(pokemon => pokemon.name.toLowerCase() === inputValue);
+    console.log(pokemonListArray)
             if(foundPokemon) {
                 fetch(foundPokemon.url)
                     .then(response => response.json())
@@ -60,14 +51,12 @@ function searchPokemon() {
                                     <button class="btn btn-warning goBack">Go Back</button>
                                 </div>
                             </div>`;
-                        goBackListPokemons(data.results)
+                        goBackListPokemons(pokemonListArray);
                     })
             }else{
                 alert(`there is no pokemon called ${input.value.toLowerCase()}`);
                 input.value='';
             }
-
-
 
 }
 buttonSearch.addEventListener('click',searchPokemon);
