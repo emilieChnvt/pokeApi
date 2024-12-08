@@ -59,7 +59,7 @@ function searchPokemon() {
                         goBackListPokemons(data.results)
                     })
             }else{
-                alert(`there is no pokemon called ${foundPokemon}`);
+                alert(`there is no pokemon called ${input.value.toLowerCase()}`);
                 input.value='';
             }
 
