@@ -9,15 +9,20 @@ let pokemonListArray =[]
 
 let apiPoke = 'https://pokeapi.co/api/v2/pokemon/'; //PAS TOUS AFFICHÉ CAR PAGE CHARGEAIT TROP LONGTEMPS
 
-fetch(apiPoke)
- .then(response => response.json())
+function initializePage(){
+    fetch(apiPoke)
+    .then(response => response.json())
     .then(data => {
         pokemonListArray = data.results;
         displayButtonAbilities();
         displayAllPokemons(pokemonListArray);
 
     });
-buttonSearch.addEventListener('click', searchPokemon);
+}
+initializePage()
+
+
+
 iconHouse.addEventListener('click', (e)=>{
     e.preventDefault();
     displayAllPokemons(pokemonListArray);
@@ -25,20 +30,19 @@ iconHouse.addEventListener('click', (e)=>{
 
 function searchPokemon() {
 
-    fetch(apiPoke)
-        .then(response => response.json())
-        .then(data => {
+    const inputValue = input.value.toLowerCase();
+    if(!inputValue){
+        alert('Please enter a valid pokemon!');
+        return;
+    }
+    if (!pokemonListArray || pokemonListArray.length === 0) {
+        alert("Les données Pokémon ne sont pas prêtes. Essayez à nouveau.");
+        return;
+    }
 
-            let pokemonName =data.results;
-            let foundPokemon= null
 
-            for(let i = 0; i < pokemonName.length; i++) {
+            const foundPokemon= pokemonListArray.find(pokemon => pokemon.name.toLowerCase() === inputValue);
 
-                if(pokemonName[i].name === input.value.toLowerCase()) {
-                    foundPokemon = pokemonName[i];
-                    input.value = '';
-                }
-            }
             if(foundPokemon) {
                 fetch(foundPokemon.url)
                     .then(response => response.json())
@@ -64,8 +68,9 @@ function searchPokemon() {
             }
 
 
-        })
+
 }
+buttonSearch.addEventListener('click',searchPokemon);
 
 
 function displayAllPokemons(pokemonListArray) {
@@ -168,7 +173,7 @@ function buttonAbilitiesClicked(abilityUrl, pokemonListArray) {
             .then(data => {
                 let pokemonsWithAbilities = data.pokemon.map(ability => ability.pokemon) // pour trouver pokemon avec ability du boutton
 
-                displayPokemonsWithAbilities(pokemonsWithAbilities, );
+                displayPokemonsWithAbilities(pokemonsWithAbilities );
             })
 }
 function displayPokemonsWithAbilities(pokemons ) {
