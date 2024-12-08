@@ -35,7 +35,8 @@ function searchPokemon() {
             for(let i = 0; i < pokemonName.length; i++) {
 
                 if(pokemonName[i].name === input.value.toLowerCase()) {
-                    foundPokemon = pokemonName[i]
+                    foundPokemon = pokemonName[i];
+                    input.value = '';
                 }
             }
             if(foundPokemon) {
@@ -59,6 +60,7 @@ function searchPokemon() {
                     })
             }else{
                 alert(`there is no pokemon called ${foundPokemon}`);
+                input.value='';
             }
 
 
