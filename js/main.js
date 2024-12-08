@@ -57,6 +57,8 @@ function searchPokemon() {
                             </div>`;
                         goBackListPokemons(data.results)
                     })
+            }else{
+                alert(`there is no pokemon called ${foundPokemon}`);
             }
 
 
