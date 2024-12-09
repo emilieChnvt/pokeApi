@@ -30,12 +30,13 @@ iconHouse.addEventListener('click', (e)=>{
     displayAllPokemons(pokemonListArray);
 })
 
- function searchPokemon() {
-    const inputValue = input.value.trim().toLowerCase();// pour supprimer les espaces blanc avan/après l'input
+ function searchPokemon(e) {
+     e.preventDefault();
+     const inputValue = input.value.trim().toLowerCase();// pour supprimer les espaces blanc avan/après l'input
 
-
+    console.log(inputValue);
     const foundPokemon= pokemonListArray.find(pokemon => pokemon.name.toLowerCase() === inputValue);
-
+    console.log(foundPokemon);
             if(foundPokemon) {
                 fetch(foundPokemon.url)
                     .then(response => response.json())
